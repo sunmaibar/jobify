@@ -12,7 +12,17 @@ const register = async (req, res) => {
     throw new BadRequestError('Email已經有人使用了')
   }
   const user = await User.create({ name, email, password })
-  res.status(201).json({ user })
+  const token = user.createJWT()
+  res.status(201).json({
+    user: {
+      email: user.email,
+      lastName: user.lastName,
+      location: user.location,
+      name: user.name,
+    },
+    token,
+    location: user.location,
+  })
 }
 const login = async (req, res) => {
   return res.send('login')

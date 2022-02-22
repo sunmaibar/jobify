@@ -16,7 +16,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     defaultError.statusCode = 400
     defaultError.msg = `${Object.keys(err.keyValue)}已經有人使用了，請再換一個`
   }
-  // res.status(defaultError.statusCode).json({ msg: err })
   res.status(defaultError.statusCode).json({ msg: defaultError.msg })
 }
 
